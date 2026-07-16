@@ -1,82 +1,177 @@
-# DrawGen 🎨📄
+# 📚 DrawGen
 
-DrawGen, Python ve Pygame kullanılarak geliştirilmiş modern arayüzlü, hızlı bir PDF görüntüleyici ve entegre beyaz tahta uygulamasıdır. Özellikle eğitimciler, öğrenciler ve sunum yapanlar için PDF üzerine çizim yapma, not alma ve boş beyaz tahta özelliklerini bir araya getirir.
+DrawGen, **Pygame** ve **PyMuPDF** kullanılarak geliştirilmiş modern bir PDF görüntüleme ve çizim uygulamasıdır.
 
+## Özellikler
 
-## ✨ Özellikler
-
-- **Gelişmiş PDF İşleme:** PyMuPDF (fitz) ile hızlı sayfa yükleme ve yüksek kaliteli (HQ) yakınlaştırma.
-- **Çizim Araçları:** Kalem, Silgi ve Geometrik Şekiller (Çizgi, Ok, Kare, Daire, Üçgen).
-- **Beyaz Tahta Modu:** PDF'ten bağımsız, sonsuz kaydırılabilir ızgaralı (grid) beyaz tahta alanı.
-- **Akıcı Navigasyon:** Mouse tekerleği, klavye ok tuşları, numpad ile sayfaya gitme ve sürükle-bırak (pan) desteği.
-- **Dokunmatik Desteği:** İki parmakla yakınlaştırma (pinch-to-zoom) ve dokunmatik kaydırma.
-- **Modern Arayüz:** Yarı saydam (glassmorphism) paneller, yumuşak animasyonlar (Tween) ve tam ekran desteği.
+- 📄 PDF görüntüleme
+- 🔍 Yakınlaştırma / Uzaklaştırma
+- ✍️ Kalem ile çizim
+- 🧽 Silgi
+- 📐 Şekil çizme
+- 📖 Sayfa geçişleri
+- 🖥️ Tam ekran modu
+- 📝 Beyaz tahta modu
+- ⚡ Yüksek performanslı PDF render sistemi
 
 ---
 
-## 🐧 Pardus İçin Kurulum Rehberi
+# Pardus Kurulumu
 
-Pardus (ve diğer Debian/Ubuntu tabanlı Linux dağıtımları) üzerinde uygulamayı sorunsuz çalıştırmak için aşağıdaki adımları sırasıyla terminalinizde uygulayın.
-
-### 1. Gerekli Sistem Paketlerinin Kurulumu
-Uygulamanın çalışması için Python, Tkinter (dosya seçici için) ve sanal ortam paketlerinin sistemde kurulu olması gerekir. Terminali açın ve şu komutu girin:
+## 1. Sistemi Güncelleyin
 
 ```bash
 sudo apt update
-sudo apt install python3 python3-pip python3-venv python3-tk -y
-2. Projenin İndirilmesi
-Projeyi GitHub'dan bilgisayarınıza klonlayın (veya ZIP olarak indirip çıkartın) ve proje klasörüne girin:
-code
-Bash
-git clone https://github.com/KULLANICI_ADINIZ/drawgen.git
-cd drawgen
-3. Sanal Ortam (Virtual Environment) Oluşturma ve Aktifleştirme
-Modern Pardus sürümlerinde Python paketlerinin sistem genelinde çakışmasını önlemek için sanal ortam kullanılması tavsiye edilir:
-code
-Bash
+sudo apt upgrade -y
+```
+
+---
+
+## 2. Python Kurulu mu Kontrol Edin
+
+```bash
+python3 --version
+```
+
+Python yüklü değilse:
+
+```bash
+sudo apt install python3 python3-pip python3-venv -y
+```
+
+---
+
+## 3. Gerekli Sistem Paketleri
+
+```bash
+sudo apt install \
+python3-dev \
+python3-tk \
+libsdl2-dev \
+libsdl2-image-dev \
+libsdl2-mixer-dev \
+libsdl2-ttf-dev \
+libfreetype6-dev \
+libportmidi-dev \
+libjpeg-dev \
+zlib1g-dev \
+libopenjp2-7 \
+libtiff-dev \
+build-essential -y
+```
+
+---
+
+## 4. Projeyi Klonlayın
+
+```bash
+git clone https://github.com/KULLANICI_ADINIZ/DrawGen.git
+```
+
+veya ZIP indirip çıkartın.
+
+Daha sonra:
+
+```bash
+cd DrawGen
+```
+
+---
+
+## 5. Sanal Ortam Oluşturun
+
+```bash
 python3 -m venv venv
+```
+
+Aktifleştirin:
+
+```bash
 source venv/bin/activate
-(Not: Terminalinizde sol tarafta (venv) yazısını gördüğünüzde sanal ortam aktif demektir. Uygulamayı her çalıştırmak istediğinizde proje klasöründe source venv/bin/activate komutunu çalıştırmalısınız.)
-4. Python Bağımlılıklarının Yüklenmesi
-Uygulamanın ihtiyaç duyduğu Pygame ve PyMuPDF paketlerini kurun:
-code
-Bash
-pip install pygame PyMuPDF
-🚀 Kullanım
-Kurulum tamamlandıktan sonra (ve sanal ortam aktifken) uygulamayı şu komutla başlatabilirsiniz:
-code
-Bash
+```
+
+---
+
+## 6. Gerekli Python Kütüphaneleri
+
+```bash
+pip install --upgrade pip
+```
+
+Ardından:
+
+```bash
+pip install pygame pymupdf
+```
+
+İsterseniz:
+
+```bash
+pip freeze > requirements.txt
+```
+
+ve daha sonra sadece:
+
+```bash
+pip install -r requirements.txt
+```
+
+kullanabilirsiniz.
+
+---
+
+# Çalıştırma
+
+```bash
 python3 main.py
-📂 Klasör Yapısı Hakkında Önemli Not
-Uygulama ilk çalıştığında ana dizinde otomatik olarak pdf_files ve assets adında iki klasör oluşturur.
-PDF Ekleme: Ana ekrandaki "PDF Ekle" butonunu kullanabilir veya PDF dosyalarınızı doğrudan pdf_files klasörünün içine atabilirsiniz.
-İkonlar: Menü butonlarının daha şık görünmesi için aşağıdaki isimlerdeki ikonları (tercihen şeffaf PNG) assets/ klasörünün içine ekleyebilirsiniz:
-hand.png
-pen.png
-shape.png
-eraser.png
-trash.png
-(Eğer ikonları koymazsanız, uygulama otomatik olarak ikonların yerine harf/metin gösterecektir, bu da çalışmasını engellemez.)
-⌨️ Kısayollar ve Kontroller
-Genel:
-F : Tam Ekranı (Fullscreen) aç/kapat.
-ESC : PDF okuyucudan çık ve kitaplığa (GridScene) dön.
-PDF Görünümü & Çizim:
-Sol Tık : Çizim yapma / Butonlara tıklama / Çift tıklama ile yakınlaştırmayı sıfırlama.
-Orta Tık (Scroll Tuşu) Basılı Tutma : Sayfayı kaydırma / Sürükleme.
-Mouse Tekerleği : Sayfayı Yakınlaştırma / Uzaklaştırma (Zoom).
-Yön Tuşları (← → ↑ ↓) veya Page Up/Down : Önceki/Sonraki sayfaya geçiş.
-🤝 Katkıda Bulunma
-Geliştirmelere açığız! Katkıda bulunmak isterseniz lütfen projeyi fork'layın ve değişikliklerinizi Pull Request olarak gönderin.
-Fork'layın
-Yeni bir dal (branch) oluşturun (git checkout -b ozellik/YeniOzellik)
-Değişikliklerinizi commit'leyin (git commit -m 'Yeni özellik eklendi')
-Dalınızı push'layın (git push origin ozellik/YeniOzellik)
-Pull Request açın
-📝 Lisans
-Bu proje MIT Lisansı altında lisanslanmıştır. Daha fazla bilgi için LICENSE dosyasına bakabilirsiniz.
-code
-Code
-### Sizin yapmanız gereken küçük değişiklikler:
-1. `https://github.com/KULLANICI_ADINIZ/drawgen.git` kısmını kendi GitHub deponuzun linki ile değiştirin.
-2. Varsa uygulamanızın ekran görüntüsünü projenize yükleyip en üstteki `![DrawGen Ekran Görüntüsü]` satırının linkini o ekran görüntüsünün linkiyle güncelleyin.
+```
+
+---
+
+# Klasör Yapısı
+
+```
+DrawGen/
+│
+├── assets/
+│   ├── hand.png
+│   ├── pen.png
+│   ├── eraser.png
+│   ├── shape.png
+│   └── trash.png
+│
+├── pdf_files/
+│
+├── main.py
+│
+└── README.md
+```
+
+---
+
+# PDF Ekleme
+
+PDF dosyalarınızı:
+
+```
+pdf_files/
+```
+
+klasörüne kopyalayabilir veya uygulama içerisindeki **PDF Ekle** butonunu kullanabilirsiniz.
+
+---
+
+# Kullanılan Teknolojiler
+
+- Python 3
+- Pygame
+- PyMuPDF (fitz)
+- Tkinter
+
+---
+
+# Lisans
+
+Bu proje açık kaynak olarak paylaşılmıştır.
+
+İstediğiniz gibi geliştirebilir ve katkıda bulunabilirsiniz.
