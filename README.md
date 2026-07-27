@@ -65,7 +65,7 @@ build-essential -y
 ## 4. Projeyi Klonlayın
 
 ```bash
-git clone https://github.com/KULLANICI_ADINIZ/DrawGen.git
+git clone https://github.com/mervankabaah/DrawGen.git
 ```
 
 veya ZIP indirip çıkartın.
