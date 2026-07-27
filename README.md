@@ -65,7 +65,7 @@ build-essential -y
 ## 4. Projeyi Klonlayın
 
 ```bash
-https://github.com/mervankabaah/pardus-drawgen.git
+git clone https://github.com/mervankabaah/pardus-drawgen.git
 ```
 
 veya ZIP indirip çıkartın.
